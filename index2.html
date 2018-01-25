@@ -1,18 +1,18 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 <!--此页面实现Word图片自动批量上传的功能-->
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <title>CKEditor 4.x多编辑器示例</title>
+    <title>CKEditor4.x多编辑器示例</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link type="text/css" rel="Stylesheet" href="WordPaster/css/WordPaster.css"/>
-    <link type="text/css" rel="Stylesheet" href="WordPaster/js/skygqbox.css" />
+	<link type="text/css" rel="stylesheet" href="WordPaster/js/skygqbox.css" />
     <script type="text/javascript" src="WordPaster/js/jquery-1.4.min.js" charset="utf-8"></script>
-	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-	<script type="text/javascript" src="WordPaster/js/w.edge.js" charset="utf-8"></script>
+	<script type="text/javascript" src="ckeditor/ckeditor.js" charset="utf-8"></script>
+    <script type="text/javascript" src="WordPaster/js/w.edge.js" charset="utf-8"></script>
     <script type="text/javascript" src="WordPaster/js/w.app.js" charset="utf-8"></script>
     <script type="text/javascript" src="WordPaster/js/w.file.js" charset="utf-8"></script>
+	<script type="text/javascript" src="WordPaster/js/skygqbox.js" charset="utf-8"></script>
 	<script type="text/javascript" src="WordPaster/js/WordPaster.js" charset="utf-8"></script>
-    <script type="text/javascript" src="WordPaster/js/skygqbox.js" charset="utf-8"></script>
 </head>
 <body>
 	<div style="font-size: medium; line-height: 130%;">
@@ -26,27 +26,26 @@
 		<p>
 			相关问题：</p>
 		<ul style="list-style-type: decimal;">
-        	<li>下载exe安装程序可支持IE,Firefox,Chrome平台。<a target="_blank" href="http://yunpan.cn/lk/sVv4WAq9rSCec?sid=301"></a></li>
-			<li>如果无法安装组件请下载进行安装<a target="_blank" href="http://www.microsoft.com/downloads/details.aspx?FamilyID=9b2da534-3e03-4391-8a4d-074b9f2bc1bf%20">Microsoft Visual C++ 2008 Redistributable Package (x86)</a></li>
+			<li>WindowsXP如果无法识别数字证书，请先下载运行<a target="_blank" href="http://yunpan.cn/lk/sVWS4E6bXChcZ">Windows证书补丁</a></li>
+			<li>如果无法安装组件请下载进行安装<a target="_blank" href="http://yunpan.cn/lk/sV5IqqTYTmXXi">VC运行库</a></li>
 			<li>如果有任何问题或建议请向我们<a target="_blank" href="http://www.ncmem.com/blog/guestbook.asp">反馈</a></li>
 		</ul>
 	</div>
-	<!--编辑器1-->
+	<!--创建FCKEditor控件-->
 	<textarea id="editor1" name="editor1"></textarea>
 	<p>编辑器2</p>
 	<textarea id="editor2" name="editor2"></textarea>
-    <script type="text/javascript">
-    	var pasterMgr = new WordPasterManager();
-    	pasterMgr.Config["PostUrl"] = "http://localhost:81/WordPasterChrCKEditor4x/php/upload.php"
-    	pasterMgr.Load();//加载控件
+	<script type="text/javascript">
+		var pasterMgr = new WordPasterManager();
+		pasterMgr.Config["PostUrl"] = "http://localhost:81/WordPaster2/WordPasterCKEditor4x/php/upload.php"
+		pasterMgr.Load(); //加载控件
 
-		CKEDITOR.config.extraPlugins = 'imagepaster,excelpaster';
-		
-		//CKEditor初始化完毕
-		CKEDITOR.on( 'instanceReady', function( ev ) {
-    		pasterMgr.SetEditor(ev.editor);
-    	});
+		CKEDITOR.on('instanceReady', function(evt)
+		{
+			pasterMgr.SetEditor(evt.editor);
+		});
 
+		//多个编辑器时为控件设置当前编辑器
 		CKEDITOR.on('currentInstance', function()
 		{
 			if(CKEDITOR.currentInstance)
@@ -54,26 +53,27 @@
 				pasterMgr.SetEditor(CKEDITOR.currentInstance);
 			}
 		});
-		CKEDITOR.config.extraPlugins = 'imagepaster,netpaster';
-		
+		CKEDITOR.config.extraPlugins = 'imagepaster,netpaster';		
+
 		//加载CKEditor编辑器
 		CKEDITOR.replace('editor1',
          {
          	toolbar:
               [
                    ['Source', 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink'],
-                   ['imagepaster', 'excelpaster']
+                   ['imagepaster', 'netpaster']
               ]
          });
+        
 		//加载CKEditor编辑器
 		CKEDITOR.replace('editor2',
-         {
+         {         	
          	toolbar:
               [
                    ['Source', 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink'],
-                   ['imagepaster', 'excelpaster']
+                   ['imagepaster', 'netpaster']
               ]
-         });
+         });         
 	</script>
 </body>
 </html>
